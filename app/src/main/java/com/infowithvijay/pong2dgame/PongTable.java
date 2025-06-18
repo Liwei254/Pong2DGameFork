@@ -34,7 +34,7 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
     private Player mOpponent;
     private Ball mBall;
     private Paint mNetPaint;
-    private Paint mTalbeBoundsPaint;
+    private Paint mTableBoundsPaint;
     private int mTableWidth;
     private int mTableHeight;
     private Context mContext;
@@ -109,11 +109,11 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
         mNetPaint.setPathEffect(new DashPathEffect(new float[]{5,5},0));
 
         // Draw Bounds
-        mTalbeBoundsPaint = new Paint();
-        mTalbeBoundsPaint.setAntiAlias(true);
-        mTalbeBoundsPaint.setColor(ContextCompat.getColor(mContext,R.color.table_color));
-        mTalbeBoundsPaint.setStyle(Paint.Style.STROKE);
-        mTalbeBoundsPaint.setStrokeWidth(15.f);
+        mTableBoundsPaint = new Paint();
+        mTableBoundsPaint.setAntiAlias(true);
+        mTableBoundsPaint.setColor(ContextCompat.getColor(mContext,R.color.table_color));
+        mTableBoundsPaint.setStyle(Paint.Style.STROKE);
+        mTableBoundsPaint.setStrokeWidth(15.f);
 
         mAiMovePorbability = 0.8f;
 
@@ -125,7 +125,7 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
 
         canvas.drawColor(ContextCompat.getColor(mContext,R.color.table_color));
-        canvas.drawRect(0,0,mTableWidth,mTableHeight,mTalbeBoundsPaint);
+        canvas.drawRect(0,0,mTableWidth,mTableHeight,mTableBoundsPaint);
 
         int middle = mTableWidth/2;
         canvas.drawLine(middle,1,middle,mTableHeight-1,mNetPaint);
