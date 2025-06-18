@@ -34,7 +34,7 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
     private Player mOpponent;
     private Ball mBall;
     private Paint mNetPaint;
-    private Paint mTableBoundsPaint;
+    private Paint mTalbeBoundsPaint;
     private int mTableWidth;
     private int mTableHeight;
     private Context mContext;
@@ -109,11 +109,11 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
         mNetPaint.setPathEffect(new DashPathEffect(new float[]{5,5},0));
 
         // Draw Bounds
-        mTableBoundsPaint = new Paint();
-        mTableBoundsPaint.setAntiAlias(true);
-        mTableBoundsPaint.setColor(ContextCompat.getColor(mContext,R.color.table_color));
-        mTableBoundsPaint.setStyle(Paint.Style.STROKE);
-        mTableBoundsPaint.setStrokeWidth(15.f);
+        mTalbeBoundsPaint = new Paint();
+        mTalbeBoundsPaint.setAntiAlias(true);
+        mTalbeBoundsPaint.setColor(ContextCompat.getColor(mContext,R.color.table_color));
+        mTalbeBoundsPaint.setStyle(Paint.Style.STROKE);
+        mTalbeBoundsPaint.setStrokeWidth(15.f);
 
         mAiMovePorbability = 0.8f;
 
@@ -125,7 +125,7 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
 
         canvas.drawColor(ContextCompat.getColor(mContext,R.color.table_color));
-        canvas.drawRect(0,0,mTableWidth,mTableHeight,mTableBoundsPaint);
+        canvas.drawRect(0,0,mTableWidth,mTableHeight,mTalbeBoundsPaint);
 
         int middle = mTableWidth/2;
         canvas.drawLine(middle,1,middle,mTableHeight-1,mNetPaint);
@@ -222,19 +222,19 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
     public void update(Canvas canvas){
 
 
-       if (checkCollisionPlayer(mPlayer,mBall)){
-           handleCollision(mPlayer,mBall);
-       }else if (checkCollisionPlayer(mOpponent,mBall)){
-           handleCollision(mOpponent,mBall);
-       }else if (checkCollisionWithTopOrBottomWall()){
-           mBall.velocity_y = -mBall.velocity_y;
-       }else if (checkCollisionWithLeftWall()){
-           mGame.setState(GameThread.STATE_LOSE);
-           return;
-       }else if (checkCollisionWithRightWall()){
-           mGame.setState(GameThread.STATE_WIN);
-           return;
-       }
+        if (checkCollisionPlayer(mPlayer,mBall)){
+            handleCollision(mPlayer,mBall);
+        }else if (checkCollisionPlayer(mOpponent,mBall)){
+            handleCollision(mOpponent,mBall);
+        }else if (checkCollisionWithTopOrBottomWall()){
+            mBall.velocity_y = -mBall.velocity_y;
+        }else if (checkCollisionWithLeftWall()){
+            mGame.setState(GameThread.STATE_LOSE);
+            return;
+        }else if (checkCollisionWithRightWall()){
+            mGame.setState(GameThread.STATE_WIN);
+            return;
+        }
 
 
 
@@ -246,26 +246,26 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
     }
 
 
-     private boolean checkCollisionPlayer(Player player,Ball ball){
+    private boolean checkCollisionPlayer(Player player,Ball ball){
 
         return player.bounds.intersects(
-            ball.cx - ball.getRadius(),
-            ball.cy - ball.getRadius(),
-            ball.cx + ball.getRadius(),
-            ball.cy + ball.getRadius()
+                ball.cx - ball.getRadius(),
+                ball.cy - ball.getRadius(),
+                ball.cx + ball.getRadius(),
+                ball.cy + ball.getRadius()
         );
 
-     }
+    }
 
 
-     private boolean checkCollisionWithTopOrBottomWall(){
+    private boolean checkCollisionWithTopOrBottomWall(){
         return ((mBall.cy <= mBall.getRadius()) || (mBall.cy + mBall.getRadius() >= mTableHeight -1));
-     }
+    }
 
 
-     private boolean checkCollisionWithLeftWall(){
+    private boolean checkCollisionWithLeftWall(){
         return mBall.cx <= mBall.getRadius();
-     }
+    }
 
 
     private boolean checkCollisionWithRightWall(){
@@ -305,7 +305,7 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
                             mlastTouchY = event.getY();
                         }
                     }
-                 break;
+                    break;
 
                 case MotionEvent.ACTION_MOVE:
                     if (moving){
@@ -318,7 +318,7 @@ public class PongTable extends SurfaceView implements SurfaceHolder.Callback {
 
                         movePlayerRacquet(dy,mPlayer);
                     }
-                break;
+                    break;
 
                 case MotionEvent.ACTION_UP:
                     moving = false;
